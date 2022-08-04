@@ -34,7 +34,7 @@ export function callTransfer(address: string, chainId: number, web3: any) {
     const dai = getDaiContract(chainId, web3)
     const chain = getChainData(chainId).chain 
     const gasPrice = chain === 'klaytn' ? await apiGetGasPriceKlaytn(chainId): undefined;
-    const gas = chain === 'klaytn' ? '80000000' : undefined
+    const gas = chain === 'klaytn' ? '80000' : undefined
 
     await dai.methods
       .transfer(address, '1')
