@@ -10,6 +10,8 @@ import WalletConnect from "@walletconnect/web3-provider";
 import CoinbaseWalletSDK from "@coinbase/wallet-sdk";
 // @ts-ignore
 import { Web3Auth } from "@web3auth/web3auth";
+// @ts-ignore
+import { KaikasWeb3Provider } from "@klaytn/kaikas-web3-provider"
 
 import Button from "./components/Button";
 import Column from "./components/Column";
@@ -20,14 +22,12 @@ import Loader from "./components/Loader";
 import ModalResult from "./components/ModalResult";
 import AccountAssets from "./components/AccountAssets";
 import ConnectButton from "./components/ConnectButton";
-
 import { apiGetAccountAssets } from "./helpers/api";
 import {
   hashPersonalMessage,
   recoverPublicKey,
-  recoverPersonalSignature,
   formatTestTransaction,
-  getChainData
+  getChainData,
 } from "./helpers/utilities";
 import { IAssetData } from "./helpers/types";
 import { fonts } from "./styles";
@@ -39,6 +39,7 @@ import {
   DAI_TRANSFER
 } from "./constants";
 import { callBalanceOf, callTransfer } from "./helpers/web3";
+import { isHexString } from "ethereumjs-util";
 
 const SLayout = styled.div`
   position: relative;
@@ -162,9 +163,9 @@ class App extends React.Component<any, any> {
     this.state = {
       ...INITIAL_STATE
     };
-
+    console.log(this.getNetwork())
     this.web3Modal = new Web3Modal({
-      network: this.getNetwork(),
+      // network: this.getNetwork(),
       cacheProvider: true,
       providerOptions: this.getProviderOptions()
     });
@@ -212,13 +213,13 @@ class App extends React.Component<any, any> {
       await this.setState({ address: accounts[0] });
       await this.getAccountAssets();
     });
-    provider.on("chainChanged", async (chainId: number) => {
+    provider.on("chainChanged", async (chainId: string) => {
       const { web3 } = this.state;
       const networkId = await web3.eth.net.getId();
-      await this.setState({ chainId, networkId });
+      chainId = isHexString(chainId)?Number(chainId).toString():chainId;
+      this.setState({ chainId: Number(chainId), networkId });
       await this.getAccountAssets();
     });
-
     provider.on("networkChanged", async (networkId: number) => {
       const { web3 } = this.state;
       const chainId = await web3.eth.chainId();
@@ -250,6 +251,9 @@ class App extends React.Component<any, any> {
         options: {
           infuraId
         }
+      },
+      kaikas: {
+        package: KaikasWeb3Provider,
       }
     };
     return providerOptions;
@@ -301,13 +305,16 @@ class App extends React.Component<any, any> {
       // send transaction
       const result = await sendTransaction(tx);
 
+      // get native currency symbol of current chain
+      const nativeCurrency: string =  getChainData(this.state.chainId).native_currency.symbol
+
       // format displayed result
       const formattedResult = {
         action: ETH_SEND_TRANSACTION,
         txHash: result,
         from: address,
         to: address,
-        value: "0 ETH"
+        value:`0 ${nativeCurrency}`
       };
 
       // display result
@@ -394,7 +401,7 @@ class App extends React.Component<any, any> {
       const result = await web3.eth.personal.sign(hexMsg, address);
 
       // verify signature
-      const signer = recoverPersonalSignature(result, message);
+      const signer = await web3.eth.personal.ecRecover(message, result);
       const verified = signer.toLowerCase() === address.toLowerCase();
 
       // format displayed result

@@ -1,7 +1,7 @@
 import * as ethUtil from "ethereumjs-util";
 import { IChainData } from "./types";
 import supportedChains from "./chains";
-import { apiGetGasPrices, apiGetAccountNonce } from "./api";
+import { apiGetGasPrices, apiGetAccountNonce, apiGetGasPriceKlaytn } from "./api";
 import { convertAmountToRawNumber, convertStringToHex } from "./bignumber";
 
 export function capitalize(string: string): string {
@@ -159,6 +159,17 @@ export function recoverPersonalSignature(sig: string, msg: string): string {
 }
 
 export async function formatTestTransaction(address: string, chainId: number) {
+  if (getChainData(chainId).chain === 'klaytn'){
+    const gasPrice = await apiGetGasPriceKlaytn(chainId);
+    return {
+      from: address,
+      to: address,
+      gas: '21000',
+      value: '0',
+      gasPrice,
+    }
+  }
+
   // from
   const from = address;
 

@@ -240,7 +240,39 @@ const supportedChains: IChainData[] = [
       contractAddress: "",
       balance: ""
     }
-  }
+  },
+  {
+    name: "Klaytn Mainnet",
+    short_name: "klaytn",
+    chain: "klaytn",
+    network: "cypress",
+    chain_id: 8217,
+    network_id: 8217,
+    rpc_url: "https://public-node-api.klaytnapi.com/v1/cypress",
+    native_currency: {
+      symbol: "KLAY",
+      name:"KLAY",
+      decimals:"18",
+      contractAddress: "",
+      balance: ""
+    }
+  },
+  {
+    name: "Klaytn Testnet",
+    short_name: "klaytn",
+    chain: "klaytn",
+    network: "baobab",
+    chain_id: 1001,
+    network_id: 1001,
+    rpc_url: "https://public-node-api.klaytnapi.com/v1/baobab",
+    native_currency: {
+      symbol: "KLAY",
+      name:"KLAY",
+      decimals:"18",
+      contractAddress: "",
+      balance: ""
+    }
+  },
 ];
 
 export default supportedChains;
