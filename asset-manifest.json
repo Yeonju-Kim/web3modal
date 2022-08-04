@@ -10,8 +10,8 @@
     "static/js/3.b2b08edd.chunk.js.map": "/web3modal/static/js/3.b2b08edd.chunk.js.map",
     "static/js/4.c65b14af.chunk.js": "/web3modal/static/js/4.c65b14af.chunk.js",
     "static/js/4.c65b14af.chunk.js.map": "/web3modal/static/js/4.c65b14af.chunk.js.map",
-    "main.js": "/web3modal/static/js/main.bcbee54b.chunk.js",
-    "main.js.map": "/web3modal/static/js/main.bcbee54b.chunk.js.map",
+    "main.js": "/web3modal/static/js/main.8c8bacb7.chunk.js",
+    "main.js.map": "/web3modal/static/js/main.8c8bacb7.chunk.js.map",
     "runtime-main.js": "/web3modal/static/js/runtime-main.8eda3a5e.js",
     "runtime-main.js.map": "/web3modal/static/js/runtime-main.8eda3a5e.js.map",
     "static/js/7.b92067f5.chunk.js": "/web3modal/static/js/7.b92067f5.chunk.js",
@@ -37,7 +37,7 @@
     "index.html": "/web3modal/index.html",
     "static/js/3.b2b08edd.chunk.js.LICENSE.txt": "/web3modal/static/js/3.b2b08edd.chunk.js.LICENSE.txt",
     "static/js/7.b92067f5.chunk.js.LICENSE.txt": "/web3modal/static/js/7.b92067f5.chunk.js.LICENSE.txt",
-    "static/js/main.bcbee54b.chunk.js.LICENSE.txt": "/web3modal/static/js/main.bcbee54b.chunk.js.LICENSE.txt",
+    "static/js/main.8c8bacb7.chunk.js.LICENSE.txt": "/web3modal/static/js/main.8c8bacb7.chunk.js.LICENSE.txt",
     "static/media/erc20.6540b4f4.svg": "/web3modal/static/media/erc20.6540b4f4.svg",
     "static/media/eth.40c2d264.svg": "/web3modal/static/media/eth.40c2d264.svg",
     "static/media/web3modal-logo.d8a1141a.png": "/web3modal/static/media/web3modal-logo.d8a1141a.png",
@@ -46,6 +46,6 @@
   "entrypoints": [
     "static/js/runtime-main.8eda3a5e.js",
     "static/js/7.b92067f5.chunk.js",
-    "static/js/main.bcbee54b.chunk.js"
+    "static/js/main.8c8bacb7.chunk.js"
   ]
 }
